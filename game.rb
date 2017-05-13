@@ -4,17 +4,19 @@ class Game
 
   attr_reader :player1, :player2
 
-  
+  @player_one_turn = true
+  @player_two_turn = false
 
 
   def initialize
     @player1 = Player.new(set_player_name)
     @player2 = Player.new(set_player_name)
+
   end
 
   def start # should set up the Game
 
-    #create player1 and player2
+
 
     draw_game
 
@@ -24,6 +26,28 @@ class Game
     puts "Please enter your name"
     @name = gets.chomp.upcase
     return @name
+  end
+
+  def set_player_symbol
+    if @player_one_turn == true
+      player = "X"
+    else
+      player = "O"
+    end
+  end
+
+
+
+  def set_player_turn
+
+    if @player_one_turn == true
+      @player_one_turn = false
+      @player_two_turn = true
+    else
+      @player_one_turn = true
+      @player_two_turn = false
+    end
+
   end
 
   def draw_game #Here we draw our game with a 3 dimensional array
@@ -38,9 +62,11 @@ class Game
 
         first.map! do |second|
 
-          if userInput.to_i == second
-            second = "X"
-          end
+            if userInput.to_i == second
+              second = set_player_symbol
+            end
+
+
 
           print "|#{second}|"
           second
@@ -51,6 +77,7 @@ class Game
 
       end
 
+      set_player_turn
       puts "Type quit for exiting game, or a number"
       userInput = gets.chomp
     end
