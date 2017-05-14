@@ -1,5 +1,5 @@
-require_relative 'board'
-require_relative 'game'
+
+
 
 class Player
 
@@ -25,7 +25,7 @@ class Player
   def player_turn
     puts "#{@name}Please enter a number: "
     @number = gets.chomp.to_i
-    draw_on_board(@number)
+    return @number
 
   end
 

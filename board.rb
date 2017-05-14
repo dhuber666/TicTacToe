@@ -1,5 +1,6 @@
+
 require_relative 'player'
-require_relative 'game'
+
 
 class Board
 
@@ -8,8 +9,8 @@ class Board
   end
 
 
-  def draw_board
-    @board_arr.each do |row|
+  def draw_board(array = @board_arr)
+    array.each do |row|
       row.each do |column|
         print "|#{column}"
       end
@@ -17,20 +18,19 @@ class Board
     end
   end
 
-  def draw_on_board(number)
+  def draw_on_board(number, symbol)
 
-    @board_arr.each do |row|
+    @new_array = @board_arr.map do |row|
+      
       row.map do |column|
 
-        if column == number
-          column = game1.player.symbol
-        else
-          column = column
-        end
+        row.map {  |column| column == number ? symbol : column  }
 
       end
 
     end
+
+    draw_board(@new_array)
 
   end
 

@@ -22,9 +22,10 @@ class Game
   end
 
   def start
+    @board.draw_board
     while true
-      @board.draw_board
-      @player.player_turn
+
+      @board.draw_on_board(@player.player_turn, @player.symbol)
       set_current_player
     end
   end
