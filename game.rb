@@ -1,89 +1,34 @@
 require_relative 'player'
+require_relative 'board'
+
 
 class Game
 
-  attr_reader :player1, :player2
-
-  @player_one_turn = true
-  @player_two_turn = false
-
+  attr_reader :player
 
   def initialize
-    @player1 = Player.new(set_player_name)
-    @player2 = Player.new(set_player_name)
-
+    @player1 = Player.new()
+    @player2 = Player.new()
+    @board = Board.new()
+    @player = @player1
   end
 
-  def start # should set up the Game
-
-
-
-    draw_game
-
-  end
-
-  def set_player_name
-    puts "Please enter your name"
-    @name = gets.chomp.upcase
-    return @name
-  end
-
-  def set_player_symbol
-    if @player_one_turn == true
-      player = "X"
+  def set_current_player
+    if @player == @player1
+      @player = @player2
     else
-      player = "O"
+      @player = @player1
     end
   end
 
-
-
-  def set_player_turn
-
-    if @player_one_turn == true
-      @player_one_turn = false
-      @player_two_turn = true
-    else
-      @player_one_turn = true
-      @player_two_turn = false
+  def start
+    while true
+      @board.draw_board
+      @player.player_turn
+      set_current_player
     end
-
   end
 
-  def draw_game #Here we draw our game with a 3 dimensional array
-
-    userInput = "go"
-
-    arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-
-    while userInput != "exit"
-
-      arr.each do |first|
-
-        first.map! do |second|
-
-            if userInput.to_i == second
-              second = set_player_symbol
-            end
-
-
-
-          print "|#{second}|"
-          second
-
-        end
-
-        print "\n"
-
-      end
-
-      set_player_turn
-      puts "Type quit for exiting game, or a number"
-      userInput = gets.chomp
-    end
-
-
-  end
 
 end
 

@@ -1,32 +1,32 @@
+require_relative 'board'
+require_relative 'game'
+
 class Player
 
-  attr_reader :name
+  attr_reader :symbol, :name
 
-  @wins = 0
-  @losses = 0
-  @ties = 0
-
-  def initialize(name)
-
-    @name = name
-
+  def initialize
+    @symbol = get_symbol
+    @name = get_name
   end
 
-  
-
-
-  def win
-    @wins +=1
+  def get_symbol
+    puts "Please enter the symbol you like to use: "
+    @symbol = gets.chomp.to_sym
+    return @symbol
   end
 
-  def loss
-    @losses +=1
+  def get_name
+    puts "Please enter your name: "
+    @name = gets.chomp
+    return @name
   end
 
-  def tie
-    @ties +=1
+  def player_turn
+    puts "#{@name}Please enter a number: "
+    @number = gets.chomp.to_i
+    draw_on_board(@number)
+
   end
-
-
 
 end
